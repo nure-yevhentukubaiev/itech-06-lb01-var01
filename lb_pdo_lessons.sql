@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.5
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Хост: 127.0.0.1:3306
--- Время создания: Мар 08 2023 г., 20:00
--- Версия сервера: 8.0.15
--- Версия PHP: 7.3.2
+-- Host: localhost
+-- Generation Time: Apr 26, 2023 at 08:43 PM
+-- Server version: 10.11.2-MariaDB
+-- PHP Version: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -19,24 +18,26 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- База данных: `lb_pdo_lessons`
+-- Database: `lb_pdo_lessons`
 --
-CREATE DATABASE IF NOT EXISTS `lb_pdo_lessons` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+DROP DATABASE IF EXISTS `lb_pdo_lessons`;
+CREATE DATABASE IF NOT EXISTS `lb_pdo_lessons` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 USE `lb_pdo_lessons`;
 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `groups`
+-- Table structure for table `groups`
 --
 
+DROP TABLE IF EXISTS `groups`;
 CREATE TABLE `groups` (
   `ID_Groups` int(10) NOT NULL,
-  `title` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `title` mediumtext NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Дамп данных таблицы `groups`
+-- Dumping data for table `groups`
 --
 
 INSERT INTO `groups` (`ID_Groups`, `title`) VALUES
@@ -49,20 +50,21 @@ INSERT INTO `groups` (`ID_Groups`, `title`) VALUES
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `lesson`
+-- Table structure for table `lesson`
 --
 
+DROP TABLE IF EXISTS `lesson`;
 CREATE TABLE `lesson` (
   `ID_Lesson` int(10) NOT NULL,
-  `week_day` text NOT NULL,
+  `week_day` mediumtext NOT NULL,
   `lesson_number` int(8) NOT NULL,
-  `auditorium` text NOT NULL,
-  `disciple` text NOT NULL,
+  `auditorium` mediumtext NOT NULL,
+  `disciple` mediumtext NOT NULL,
   `type` enum('Lecture','Practical','Laboratory') NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Дамп данных таблицы `lesson`
+-- Dumping data for table `lesson`
 --
 
 INSERT INTO `lesson` (`ID_Lesson`, `week_day`, `lesson_number`, `auditorium`, `disciple`, `type`) VALUES
@@ -75,16 +77,17 @@ INSERT INTO `lesson` (`ID_Lesson`, `week_day`, `lesson_number`, `auditorium`, `d
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `lesson_groups`
+-- Table structure for table `lesson_groups`
 --
 
+DROP TABLE IF EXISTS `lesson_groups`;
 CREATE TABLE `lesson_groups` (
   `FID_Lesson2` int(10) NOT NULL,
   `FID_Groups` int(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Дамп данных таблицы `lesson_groups`
+-- Dumping data for table `lesson_groups`
 --
 
 INSERT INTO `lesson_groups` (`FID_Lesson2`, `FID_Groups`) VALUES
@@ -107,16 +110,17 @@ INSERT INTO `lesson_groups` (`FID_Lesson2`, `FID_Groups`) VALUES
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `lesson_teacher`
+-- Table structure for table `lesson_teacher`
 --
 
+DROP TABLE IF EXISTS `lesson_teacher`;
 CREATE TABLE `lesson_teacher` (
   `FID_Teacher` int(10) NOT NULL,
   `FID_Lesson1` int(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Дамп данных таблицы `lesson_teacher`
+-- Dumping data for table `lesson_teacher`
 --
 
 INSERT INTO `lesson_teacher` (`FID_Teacher`, `FID_Lesson1`) VALUES
@@ -134,16 +138,17 @@ INSERT INTO `lesson_teacher` (`FID_Teacher`, `FID_Lesson1`) VALUES
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `teacher`
+-- Table structure for table `teacher`
 --
 
+DROP TABLE IF EXISTS `teacher`;
 CREATE TABLE `teacher` (
   `ID_Teacher` int(10) NOT NULL,
-  `name` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `name` mediumtext NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Дамп данных таблицы `teacher`
+-- Dumping data for table `teacher`
 --
 
 INSERT INTO `teacher` (`ID_Teacher`, `name`) VALUES
@@ -152,23 +157,23 @@ INSERT INTO `teacher` (`ID_Teacher`, `name`) VALUES
 (3, 'Ivaschenko G.S.');
 
 --
--- Индексы сохранённых таблиц
+-- Indexes for dumped tables
 --
 
 --
--- Индексы таблицы `groups`
+-- Indexes for table `groups`
 --
 ALTER TABLE `groups`
   ADD PRIMARY KEY (`ID_Groups`);
 
 --
--- Индексы таблицы `lesson`
+-- Indexes for table `lesson`
 --
 ALTER TABLE `lesson`
   ADD PRIMARY KEY (`ID_Lesson`);
 
 --
--- Индексы таблицы `teacher`
+-- Indexes for table `teacher`
 --
 ALTER TABLE `teacher`
   ADD PRIMARY KEY (`ID_Teacher`);
